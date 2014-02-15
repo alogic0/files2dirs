@@ -2,6 +2,7 @@
 
 source="$(pwd)"/orig
 dest="$(pwd)"/dest
+topfl=cataloguef7eb.html
 
 ext_file () { 
    lnk=$(echo "$1" | sed -r 's@^.*<a href="@@; s@\?.*$@@')
@@ -26,6 +27,6 @@ f_tree () {
   done
 }
 
-cp $source/cataloguef7eb.html $dest
+cp $source/$topfl $dest
 cd $dest
-f_tree cataloguef7eb.html
+f_tree $topfl
