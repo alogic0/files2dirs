@@ -5,12 +5,12 @@ dest="$(pwd)"/dest
 topfl=cataloguef7eb.html
 
 ext_file () { 
-   lnk=$(echo "$1" | sed -r 's@^.*<a href="@@; s@\?.*$@@')
+   lnk=$(echo "$1" | sed -r 's@^.*<a href="@@; s@".*$@@; s@\?.*$@@')
    echo $(basename "$lnk")
 }
 
 ext_dir () {
-   echo "$1" | sed -r 's@^.*<a href="[^"]+"> *@@; s@ *<.*$@@'
+   echo "$1" | sed -r 's@^.*<a href="[^"]+"> *@@; s@ *<.*$@@; s@\&#x00a0;@ @g'
 }
 
 f_tree () {
