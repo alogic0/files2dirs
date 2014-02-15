@@ -4,12 +4,12 @@ source="$(pwd)"/orig
 dest="$(pwd)"/dest
 
 ext_file () { 
-   lnk=$(echo "$1" | sed -r 's@^.*<a href="@@' | sed -r 's@".*$@@')
+   lnk=$(echo "$1" | sed -r 's@^.*<a href="@@; s@\?.*$@@')
    echo $(basename "$lnk")
 }
 
 ext_dir () {
-   echo "$1" | sed -r 's@^.*<a href="[^"]+"> *@@' | sed -r 's@ *<.*$@@'
+   echo "$1" | sed -r 's@^.*<a href="[^"]+"> *@@; s@ *<.*$@@'
 }
 
 f_tree () {
@@ -26,6 +26,6 @@ f_tree () {
   done
 }
 
-cp $source/catalogueabcd.html $dest
+cp $source/cataloguef7eb.html $dest
 cd $dest
-f_tree catalogueabcd.html
+f_tree cataloguef7eb.html
