@@ -10,7 +10,9 @@ ext_file () {
 }
 
 ext_dir () {
-   echo "$1" | sed -r 's@^.*<a href="[^"]+"> *@@; s@ *<.*$@@; s@\&#x00a0;@ @g'
+   echo "$1" | sed -r 's@^.*<a href="[^"]+"> *@@; s@ *</.*$@@; 
+                       s@\&#x00a0;@ @g; s@\&#xe802;@ @g;
+                       s@<sup>|\&#x00ae\;@@g; s@/@,@g;'
 }
 
 f_tree () {
@@ -18,7 +20,9 @@ f_tree () {
       fl=$(ext_file "$s")
       if [ -f $source/$fl ]; then
         dir_n="$(ext_dir "$s")"
-        mkdir "$dir_n"
+        if [ ! -d "$dir_n" ]; then
+          mkdir "$dir_n" || echo "Error: $fl $dir_n"
+        fi
         cp $source/$fl "$dir_n"
         pushd "$dir_n" >/dev/null
         f_tree $fl
