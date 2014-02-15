@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source=abspath1
-dest=abspath2
+source="$(pwd)"/orig
+dest="$(pwd)"/dest
 
 ext_file () { 
    lnk=$(echo "$1" | sed -r 's@^.*<a href="@@' | sed -r 's@".*$@@')
@@ -19,9 +19,9 @@ f_tree () {
         dir_n="$(ext_dir "$s")"
         mkdir "$dir_n"
         cp $source/$fl "$dir_n"
-        pushd "$dir_n"
+        pushd "$dir_n" >/dev/null
         f_tree $fl
-        popd
+        popd >/dev/null
       fi
   done
 }
