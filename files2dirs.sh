@@ -10,9 +10,10 @@ ext_file () {
 }
 
 ext_dir () {
-   echo "$1" | sed -r 's@^.*<a href="[^"]+"> *@@; s@ *</.*$@@; 
-                       s@\&#x00a0;@ @g; s@\&#xe802;@ @g;
-                       s@<sup>|\&#x00ae\;@@g; s@/@,@g;'
+   echo "$1" | sed -r 's@^.*<a href="[^"]+"> *@@; s@ *</a>.*$@@; 
+                       s@\&#x00a0;|\&#xe802;@ @g;
+                       s@<.*sup>|<.*strong>|<.*span>|<.*b>|\&#x00ae;|\&amp;|#x00fc;@@g;
+                       s@/@,@g;'
 }
 
 f_tree () {
